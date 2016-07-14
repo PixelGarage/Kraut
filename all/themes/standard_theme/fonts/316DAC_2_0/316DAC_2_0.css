@@ -1,0 +1,9 @@
+@font-face {
+    font-family: '316DAC_2_0';
+    src: url('fonts/316DAC_2_0.eot');
+    src: url('fonts/316DAC_2_0.eot') format('embedded-opentype'),
+         url('fonts/316DAC_2_0.woff2') format('woff2'),
+         url('fonts/316DAC_2_0.woff') format('woff'),
+         url('fonts/316DAC_2_0.ttf') format('truetype'),
+         url('fonts/316DAC_2_0.svg#316DAC_2_0') format('svg');
+}
