@@ -15,16 +15,16 @@
 @media screen and (min-width: 30em) { /* >= 480 px */
     /* header: logo and menu and navigation */
     #header {
-        height: 140px;
+        height: 150px;
     }
     nav.block-main-menu ul li a,
     nav.block-main-menu ul li a:visited {
-        font-size: 1.5em;
+        font-size: 1.3em;
         line-height: 1;
     }
     #logo {
         margin: 1.4em 0;
-        max-width: 360px;
+        max-width: 320px;
     }
     .node-type-werk .nav-node-container .nav-node-prev {
         margin-left: 1em;
@@ -94,11 +94,11 @@
 @media screen and (min-width: 40em) {  /* >= 640 px */
     /* header: logo and columns width */
     #header {
-        height: 140px;
+        height: 170px;
     }
     #logo {
         margin: 1.6em 0;
-        max-width: 440px;
+        max-width: 380px;
     }
     #columns {
         width: 75%;
@@ -125,12 +125,22 @@
 @media screen and (min-width: 48em) { /* >= 768 px */
     /* header: logo and columns width */
     #header {
-        height: 200px;
+        height: 190px;
     }
     #logo {
-        margin: 2.25em 0;
-        max-width: 500px;
+        margin: 1.7em 0 2.25em 0;
+        max-width: 430px;
     }
+
+    /* site name & slogan */
+    #name-and-slogan #site-slogan {
+        position: relative;
+        margin: -15px 0 10px;
+        font-family: "316DAC_2_0", Arial, Helvetica, sans-serif;
+        font-size: 1.3em;
+        letter-spacing: 0.02em;
+    }
+
     /* isotope */
     .view-werk-isotope .isotope .grid-sizer,
     .view-werk-isotope .isotope .isotope-item {
@@ -171,7 +181,7 @@
 
     /* contact page */
     .node-about-page.node-full .field-name-field-portrait img {
-        margin: 8em 0 0;
+        margin: 2em 0 0;
         width: 100%;
     }
     .node-about-page.node-full .field-name-field-philosophie {
