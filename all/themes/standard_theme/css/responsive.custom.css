@@ -81,8 +81,8 @@
     }
 
     /* ==================================================================================
- *   Basic page
- * ================================================================================== */
+     *   Basic page
+     * ================================================================================== */
 
     .node.node-page {
         width: 100%;
@@ -125,7 +125,7 @@
 @media screen and (min-width: 48em) { /* >= 768 px */
     /* header: logo and columns width */
     #header {
-        height: 190px;
+        height: 200px;
     }
     #logo {
         margin: 1.7em 0 2.25em 0;
@@ -137,7 +137,7 @@
         position: relative;
         margin: -15px 0 10px;
         font-family: "316DAC_2_0", Arial, Helvetica, sans-serif;
-        font-size: 1.3em;
+        font-size: 1.2em;
         letter-spacing: 0.02em;
     }
 
@@ -220,7 +220,24 @@
 }
 
 @media screen and (min-width: 64em) { /* >= 1024 px */
-    /* isotope */
+  /* submenu floating */
+  .sub-menu-container {
+    position: fixed;
+    margin: 0;
+    z-index: 200;
+  }
+  .sub-menu-container .sub-menu-inner {
+    padding: 20px;
+  }
+  .sub-menu-container .sub-menu-inner ul {
+    width: 100%;
+    text-align: left;
+  }
+  .sub-menu-container .sub-menu-inner ul>li {
+    display:block;
+  }
+
+  /* isotope */
     .view-werk-isotope .isotope .grid-sizer,
     .view-werk-isotope .isotope .isotope-item {
         width: 25%;

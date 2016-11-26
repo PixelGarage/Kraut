@@ -128,6 +128,16 @@
 
   </header>
 
+  <!-- region: Submenu (project links) -->
+  <?php if ($project_links): ?>
+    <div class="sub-menu-container"  role="navigation">
+      <div class="sub-menu-inner">
+        <?php print $project_links; ?>
+      </div>
+    </div>
+  <?php endif; ?>
+
+
   <!-- Navigation elements -->
   <?php print render($page['menu_bar']); ?>
 

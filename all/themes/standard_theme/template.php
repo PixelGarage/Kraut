@@ -67,6 +67,11 @@ function standard_theme_preprocess_page(&$vars) {
       $vars['title'] = '';
   }
 
+  // add project menu for front page
+  if ($vars['is_front']) {
+    $vars['project_links'] = _get_project_links();
+  }
+
   // add node page template suggestions
   if (isset($vars['node'])) {
     $type = $vars['node']->type;
@@ -81,21 +86,37 @@ function standard_theme_preprocess_page(&$vars) {
   }
 }
 
+function _get_project_links() {
+  global $language;
+  $query = _get_werk_query_for('next');
+  $rows = db_query($query, array(
+    ':weight' => -99999999,
+    ':type' => 'werk',
+    ':lang' => $language->language))->fetchAll();
+
+  $titles = array();
+  foreach ($rows as $index => $row) {
+    $project_link = l(
+      $row->field_shortcut_value,
+      'node/' . $row->nid,
+      array('attributes' => array('class' => array('project-link')))
+    );
+    $titles[] = '<li>' . $project_link . '</li>';
+  }
+
+  return '<ul>' . implode("\n", $titles) . '</ul>';
+}
+
 /**
  * Internal function to retrieve the previous or next node (werk) of a given node (werk) in the ordered sequence of all nodes.
  */
 function _node_sibling($node, $dir = 'next', $prepend_text = '', $append_text = '', $next_prev_text = NULL) {
-  $dir_op = $dir == 'prev' ? '<' : '>';
-  $sort = $dir == 'prev' ? 'DESC' : 'ASC';
-  $query = 'SELECT n.nid, s.field_shortcut_value FROM {node} n '
-    . 'LEFT JOIN {field_data_field_shortcut} s ON n.nid = s.entity_id '
-    . 'LEFT JOIN {field_data_field_weight} w ON n.nid = w.entity_id '
-    . 'WHERE w.field_weight_value ' . $dir_op . ' :weight '
-    . 'AND n.type = :type AND n.status = 1 '
-    . "AND n.language IN (:lang, 'und') "
-    . 'ORDER BY w.field_weight_value ' . $sort . ' LIMIT 1';
   //use fetchObject to fetch a single row
-  $row = db_query($query, array(':weight' => $node->field_weight['und'][0]['value'], ':type' => $node->type, ':lang' => $node->language))->fetchObject();
+  $query = _get_werk_query_for($dir);
+  $row = db_query($query . ' LIMIT 1', array(
+    ':weight' => $node->field_weight['und'][0]['value'],
+    ':type' => $node->type,
+    ':lang' => $node->language))->fetchObject();
 
   if ($row) {
     // add links to head for relation of node to other nodes (navigation framework)
@@ -112,9 +133,25 @@ function _node_sibling($node, $dir = 'next', $prepend_text = '', $append_text = 
     $prepend_text = $prepend_text ? l($prepend_text, 'node/' . $row->nid, array('attributes' => array('rel' => array($dir), 'class' => array('prepend-node-title')))) : "";
     $append_text = $append_text ? l($append_text, 'node/' . $row->nid, array('attributes' => array('rel' => array($dir), 'class' => array('append-node-title')))) : "";
     return $prepend_text . l($text, 'node/' . $row->nid, array('attributes' => array('rel' => array($dir), 'class' => array('node-title')))) . $append_text;
-  } else {
+  }
+  else {
     return FALSE;
   }
+}
+
+function _get_werk_query_for($dir = 'next') {
+  $dir_op = $dir == 'prev' ? '<' : '>';
+  $sort = $dir == 'prev' ? 'DESC' : 'ASC';
+
+  $query = 'SELECT n.nid, s.field_shortcut_value FROM {node} n '
+    . 'LEFT JOIN {field_data_field_shortcut} s ON n.nid = s.entity_id '
+    . 'LEFT JOIN {field_data_field_weight} w ON n.nid = w.entity_id '
+    . 'WHERE w.field_weight_value ' . $dir_op . ' :weight '
+    . 'AND n.type = :type AND n.status = 1 '
+    . "AND n.language IN (:lang, 'und') "
+    . 'ORDER BY w.field_weight_value ' . $sort;
+
+  return $query;
 }
 
 /* =============================================================================

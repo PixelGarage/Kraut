@@ -9,20 +9,6 @@
     var headerHeight = 180;
 
     /**
-     * Adapts the columns top margin if the body contains a system message
-     */
-    Drupal.behaviors.messageMarginCorrection = {
-        attach: function(context) {
-            if ($("#messages").length > 0) {
-                // a system message is contained in the body, reduce margin for columns
-                $("#columns").css("margin-top", "20px");
-            } else {
-                $("#columns").css("margin-top", headerHeight+20);
-            }
-        }
-    };
-
-    /**
      * Allows full size clickable items.
      */
     Drupal.behaviors.fullSizeClickableItems = {
@@ -39,7 +25,39 @@
         }
     };
 
-    /**
+  /**
+   * A floating project menu  that is positioned according to the scroll position.
+   */
+  Drupal.behaviors.floatingProjectMenu = {
+    attach: function () {
+      var $pageContainer = $('#page'),
+        $projectMenuCont = $pageContainer.find('.sub-menu-container');
+
+      //
+      // animate project menu, if visible
+      if ($projectMenuCont.is(':visible')) {
+        //
+        // position project menu during scrolling
+        $(window).on('scroll resize', function() {
+          var scrollPos = $(window).scrollTop();
+
+          //
+          // define position of anchor menu
+          if ($(window).width() < 1024) {
+            //  menu position on top of page
+            $projectMenuCont.css({'position': 'static'});
+          }
+          else {
+            // animate menu to position
+            $projectMenuCont.css({'position': 'absolute'});
+            $projectMenuCont.animate({'top': scrollPos-60}, {duration:300, queue:false, easing:'swing'});
+          }
+        });
+      }
+    }
+  };
+
+  /**
      * Scrolls smoothly to the url anchor, when menu is clicked.
      */
     Drupal.behaviors.smoothScrollingToAnchor = {

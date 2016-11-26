@@ -148,6 +148,7 @@ html {
 
 
 body {
+  padding-top: 200px;
   font-family: "316DAC_2_0", Arial, Helvetica, sans-serif;
   font-size: 100%;  /* corresponds to 16px */
 }
@@ -269,7 +270,7 @@ a:focus {
 #header {
     position: fixed;
     top: 0;
-    height: 135px;
+    height: 155px;
     width: 1280px;
     max-width: 100%;
     background-color: rgba(255,255,255,1.0);
@@ -285,7 +286,7 @@ a:focus {
 }
 #columns {
     position: relative;
-    margin: 200px auto 100px;
+    margin: 0 auto 100px;
     width: 90%;
 }
 
@@ -468,6 +469,33 @@ nav.block-main-menu ul li a:hover{
     border: none;
     background: #f8f8f8 url("images/icon_search.png") no-repeat 0 2px;
 }
+
+/* =============================================================================
+ *  Submenu below header (floating if window width > 1024px)
+ * ========================================================================== */
+.sub-menu-container {
+  margin: 0 auto 100px;
+  background-color: #fff;
+}
+.sub-menu-container .sub-menu-inner ul {
+  list-style-type:none;
+  margin: 0 auto;
+  padding: 0;
+  width: 75%;
+  text-align: center;
+}
+.sub-menu-container .sub-menu-inner ul>li {
+  display:inline-block;
+  list-style-type:none;
+  margin:0;
+  padding: 0;
+}
+.sub-menu-container .sub-menu-inner ul>li>a {
+  margin:0;
+  padding: 0 1em;
+}
+
+
 
 
 /* =============================================================================
