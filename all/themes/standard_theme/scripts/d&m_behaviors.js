@@ -43,7 +43,7 @@
 
           //
           // define position of anchor menu
-          if ($(window).width() < 1024) {
+          if ($(window).width() < 1280) {
             //  menu position on top of page
             $projectMenuCont.css({'position': 'static'});
           }
