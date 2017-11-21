@@ -88,23 +88,32 @@ function standard_theme_preprocess_page(&$vars) {
 
 function _get_project_links() {
   global $language;
-  $query = _get_werk_query_for('next');
-  $rows = db_query($query, array(
-    ':weight' => -99999999,
-    ':type' => 'werk',
-    ':lang' => $language->language))->fetchAll();
+  $vid = taxonomy_vocabulary_machine_name_load('projekt_typ')->vid;
+  $terms = taxonomy_get_tree($vid);
+  $markup = '';
 
-  $titles = array();
-  foreach ($rows as $index => $row) {
-    $project_link = l(
-      $row->field_shortcut_value,
-      'node/' . $row->nid,
-      array('attributes' => array('class' => array('project-link')))
-    );
-    $titles[] = '<li>' . $project_link . '</li>';
+  foreach($terms as $term) {
+    $titles = array();
+    $query = _get_werk_query_for('next', $term->tid);
+    $rows = db_query($query, array(
+      ':weight' => -99999999,
+      ':type' => 'werk',
+      ':lang' => $language->language))->fetchAll();
+
+    foreach ($rows as $index => $row) {
+      $project_link = l(
+        $row->field_shortcut_value,
+        'node/' . $row->nid,
+        array('attributes' => array('class' => array('project-link')))
+      );
+      $titles[] = '<li>' . $project_link . '</li>';
+    }
+    // create list with title
+    $markup .= '<div>' . $term->name . '</div>';
+    $markup .= '<ul>' . implode("\n", $titles) . '</ul>';
   }
 
-  return '<ul>' . implode("\n", $titles) . '</ul>';
+  return $markup;
 }
 
 /**
@@ -139,17 +148,24 @@ function _node_sibling($node, $dir = 'next', $prepend_text = '', $append_text = 
   }
 }
 
-function _get_werk_query_for($dir = 'next') {
+function _get_werk_query_for($dir = 'next', $proj_typ = false) {
   $dir_op = $dir == 'prev' ? '<' : '>';
   $sort = $dir == 'prev' ? 'DESC' : 'ASC';
 
+
   $query = 'SELECT n.nid, s.field_shortcut_value FROM {node} n '
+    . 'LEFT JOIN {field_data_field_projekt_typ} p ON n.nid = p.entity_id '
     . 'LEFT JOIN {field_data_field_shortcut} s ON n.nid = s.entity_id '
     . 'LEFT JOIN {field_data_field_weight} w ON n.nid = w.entity_id '
     . 'WHERE w.field_weight_value ' . $dir_op . ' :weight '
     . 'AND n.type = :type AND n.status = 1 '
-    . "AND n.language IN (:lang, 'und') "
-    . 'ORDER BY w.field_weight_value ' . $sort;
+    . "AND n.language IN (:lang, 'und') ";
+
+  if ($proj_typ) {
+    $query .= 'AND p.field_projekt_typ_tid = ' . $proj_typ;
+  }
+  $query .= ' ORDER BY w.field_weight_value ' . $sort;
+
 
   return $query;
 }

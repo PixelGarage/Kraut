@@ -1,0 +1,49 @@
+body {
+  padding-top: 0;
+}
+@media screen and (min-width: 48em) {
+  body {
+    padding-top: 220px;
+  }
+}
+body #header {
+  position: relative;
+  height: auto;
+  width: auto;
+}
+@media screen and (min-width: 48em) {
+  body #header {
+    position: fixed;
+    height: 200px;
+    width: 1280px;
+  }
+}
+body #header nav.block-main-menu {
+  margin-bottom: 30px;
+}
+body #header nav.block-main-menu ul {
+  display: block;
+}
+body #header nav.block-main-menu ul li {
+  display: block;
+}
+body #header nav.block-main-menu ul li:not(:first-child) {
+  border-left: none;
+}
+@media screen and (min-width: 48em) {
+  body #header nav.block-main-menu {
+    margin-bottom: 30px;
+  }
+  body #header nav.block-main-menu ul {
+    display: inline-block;
+  }
+  body #header nav.block-main-menu ul li {
+    display: inline-block;
+  }
+  body #header nav.block-main-menu ul li:not(:first-child) {
+    border-left: 1px solid #222;
+  }
+}
+body .view-profile {
+  margin-bottom: 100px;
+}
