@@ -26,6 +26,7 @@ body #header nav.block-main-menu ul {
 }
 body #header nav.block-main-menu ul li {
   display: block;
+  text-align: center;
 }
 body #header nav.block-main-menu ul li:not(:first-child) {
   border-left: none;
@@ -43,6 +44,24 @@ body #header nav.block-main-menu ul li:not(:first-child) {
   body #header nav.block-main-menu ul li:not(:first-child) {
     border-left: 1px solid #222;
   }
+}
+body .sub-menu-container {
+  margin: 0 auto 30px;
+}
+body .sub-menu-container .sub-menu-inner div {
+  font-weight: bold;
+  text-align: center;
+}
+@media screen and (min-width: 80em) {
+  body .sub-menu-container .sub-menu-inner div {
+    text-align: left;
+  }
+}
+body .sub-menu-container .sub-menu-inner ul {
+  padding-bottom: 20px;
+}
+body .sub-menu-container .sub-menu-inner ul li a {
+  padding: 0 7.5px;
 }
 body .view-profile {
   margin-bottom: 100px;

@@ -105,6 +105,7 @@ body {
 
         li {
           display: block;
+          text-align: center;
           &:not(:first-child) {
             border-left: none;
           }
@@ -127,6 +128,32 @@ body {
       }
     }
   }
+  .sub-menu-container {
+    margin: 0 auto 30px;
+
+    .sub-menu-inner {
+      div {
+        font-weight: bold;
+        text-align: center;
+        @media @wide {
+          //text-indent: 5px;
+          text-align: left;
+        }
+      }
+      ul {
+        padding-bottom: 20px;
+        li {
+          a {
+            padding: 0 7.5px;
+            @media @wide {
+              //padding-left: 0;
+            }
+          }
+        }
+      }
+    }
+  }
+
   .view-profile {
     margin-bottom: 100px;
   }
