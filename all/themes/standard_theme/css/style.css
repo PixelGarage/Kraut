@@ -46,8 +46,13 @@ body #header nav.block-main-menu ul li:not(:first-child) {
   }
 }
 body .sub-menu-container {
-  position: absolute;
+  position: static;
   margin: 0 auto 30px;
+}
+@media screen and (min-width: 64em) {
+  body .sub-menu-container {
+    position: absolute;
+  }
 }
 body .sub-menu-container .sub-menu-inner div {
   font-weight: bold;

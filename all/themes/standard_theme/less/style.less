@@ -130,8 +130,12 @@ body {
   }
   // Submenu
   .sub-menu-container {
-    position: absolute;
+    position: static;
     margin: 0 auto 30px;
+
+    @media @normal {
+      position: absolute;
+    }
 
     .sub-menu-inner {
       div {
