@@ -27,7 +27,7 @@
 
   /**
    * A floating project menu  that is positioned according to the scroll position.
-   */
+
   Drupal.behaviors.floatingProjectMenu = {
     attach: function () {
       var $pageContainer = $('#page'),
@@ -56,6 +56,7 @@
       }
     }
   };
+   */
 
   /**
      * Scrolls smoothly to the url anchor, when menu is clicked.

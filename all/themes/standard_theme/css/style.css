@@ -46,6 +46,7 @@ body #header nav.block-main-menu ul li:not(:first-child) {
   }
 }
 body .sub-menu-container {
+  position: absolute;
   margin: 0 auto 30px;
 }
 body .sub-menu-container .sub-menu-inner div {
@@ -62,6 +63,8 @@ body .sub-menu-container .sub-menu-inner ul {
 }
 body .sub-menu-container .sub-menu-inner ul li a {
   padding: 0 7.5px;
+}
+@media screen and (min-width: 80em) {
 }
 body .view-profile {
   margin-bottom: 100px;
