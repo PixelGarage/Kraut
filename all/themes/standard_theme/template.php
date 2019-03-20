@@ -164,7 +164,7 @@ function _get_werk_query_for($dir = 'next', $proj_typ = false) {
   if ($proj_typ) {
     $query .= 'AND p.field_projekt_typ_tid = ' . $proj_typ;
   }
-  $query .= ' ORDER BY w.field_weight_value ' . $sort;
+  $query .= ' ORDER BY s.field_shortcut_value ' . $sort;
 
 
   return $query;
